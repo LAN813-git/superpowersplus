@@ -1,83 +1,130 @@
 # Super Powers Plus
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![GitHub Stars](https://img.shields.io/github/stars/LAN813-git/superpowersplus?style=social)](https://github.com/LAN813-git/superpowersplus)
+Super Powers Plus is a complete software development methodology for your coding agents, built on top of [obra/superpowers](https://github.com/obra/superpowers) and [mattpocock/skills](https://github.com/mattpocock/skills). It combines the best of both worlds into 21 composable skills and a 5-stage workflow that just works.
 
-> **Superpowers + Mattpocock skills 融合增强版。21 个技能，5 阶段工作流，一键安装。**
+## Quickstart
 
-基于 [obra/superpowers](https://github.com/obra/superpowers) 和 [mattpocock/skills](https://github.com/mattpocock/skills) 融合而成，为 Claude Code 提供完整的工程化开发体系。
+Give your agent Super Powers Plus: [Claude Code](#claude-code), [Codex CLI](#codex-cli), [Cursor](#cursor), [Gemini CLI](#gemini-cli), [GitHub Copilot CLI](#github-copilot-cli).
 
-## 对比
+## How it works
 
-| | 手动装 skill | obra/superpowers | **superpowersplus** |
-|---|:---:|:---:|:---:|
-| 技能数量 | 散装 | 仅 sp 系列 | **sp + mp 融合，21 个** |
-| 融合技能 | 自己折腾 | 无 | **6 个深度融合** |
-| 安装方式 | 手动复制 | 手动复制 | **一键安装** |
-| 工作流设计 | 无 | 无 | **五阶段完整工作流** |
+It starts from the moment you fire up your coding agent. As soon as it sees that you're building something, it *doesn't* just jump into trying to write code. Instead, it steps back and asks you what you're really trying to do.
 
-## 安装
+Once it's teased a spec out of the conversation, it shows it to you in chunks short enough to actually read and digest.
+
+After you've signed off on the design, your agent puts together an implementation plan that's clear enough for an enthusiastic junior engineer with poor taste, no judgement, no project context, and an aversion to testing to follow. It emphasizes true red/green TDD, YAGNI (You Aren't Gonna Need It), and DRY.
+
+Next up, once you say "go", it launches a *subagent-driven-development* process, having agents work through each engineering task, inspecting and reviewing their work, and continuing forward.
+
+There's a bunch more to it, but that's the core of the system. And because the skills trigger automatically, you don't need to do anything special. Your coding agent just has Super Powers Plus.
+
+## Installation
+
+Installation differs by harness. If you use more than one, install Super Powers Plus separately for each one.
+
+### Claude Code
 
 ```bash
-# Linux / macOS
 curl -sSL https://raw.githubusercontent.com/LAN813-git/superpowersplus/main/install.sh | bash
+```
 
-# Windows (PowerShell)
+Or on Windows (PowerShell):
+
+```powershell
 irm https://raw.githubusercontent.com/LAN813-git/superpowersplus/main/install.ps1 | iex
 ```
 
-验证：
+### Codex CLI
 
 ```bash
-ls ~/.claude/skills/fused/
+# Copy skills to Codex skills directory
+cp -r skills/fused/* ~/.codex/skills/
 ```
 
-## 6 个融合技能
-
-| 技能 | 干什么 | 场景 |
-|------|--------|------|
-| `diagnose` | 先建反馈循环再调试 | 报错/异常 |
-| `tdd` | 先写测试再写代码 | 功能开发 |
-| `review` | 双轴审查：规范 + 需求 | 代码审查 |
-| `brainstorming` | HARD-GATE：先设计后编码 | 新功能/设计 |
-| `writing-pipeline` | 三阶段写作流水线 | 写作/文章 |
-| `qa-triage` | 交互式 QA→自动分诊 | QA/bug |
-
-## 15 个引用技能
-
-`verification-before-completion` `writing-plans` `dispatching-parallel-agents` `finishing-a-development-branch` `using-git-worktrees` `grill-with-docs` `to-issues` `to-prd` `prototype` `caveman` `handoff` `teach` `zoom-out` `improve-codebase-architecture` `git-guardrails`
-
-## 五阶段工作流
-
-```
-设计 → 计划 → 实现 → 审查 → 交付
- ↓       ↓       ↓       ↓       ↓
-brainstorm  plans   tdd    review  verify
-```
-
-## 使用
+### Cursor
 
 ```bash
-claude
-
-> brainstorming 我想给项目添加用户认证
-> diagnose 登录页面在某些情况下崩溃
-> review main
-> qa-triage
+# Copy skills to Cursor rules directory
+mkdir -p .cursor/rules
+cp skills/fused/*.md .cursor/rules/
 ```
 
-## 文档
+### Gemini CLI
 
-- [完整体系文档](docs/system.md)
-- [快速上手](docs/quickstart.md)
-- [技能路由表](docs/skill-routing.md)
-- [使用示例](examples/)
+```bash
+# Append skills to GEMINI.md
+cat skills/fused/*.md >> GEMINI.md
+```
 
-## 致谢
+### GitHub Copilot CLI
 
-- [obra/superpowers](https://github.com/obra/superpowers) — Anthropic 内置技能体系
-- [mattpocock/skills](https://github.com/mattpocock/skills) — 工程技能库
+```bash
+# Copy skills to Copilot instructions
+mkdir -p .github
+cat skills/fused/*.md >> .github/copilot-instructions.md
+```
+
+## The Basic Workflow
+
+1. **brainstorming** - Activates before writing code. Refines rough ideas through questions, explores alternatives, presents design in sections for validation. Saves design document. HARD-GATE: no code until user approves.
+
+2. **writing-plans** - Activates with approved design. Breaks work into bite-sized tasks (2-5 minutes each). Every task has exact file paths, complete code, verification steps.
+
+3. **test-driven-development** - Activates during implementation. Enforces RED-GREEN-REFACTOR: write failing test, watch it fail, write minimal code, watch it pass, commit. Iron Law: no production code without a failing test first.
+
+4. **review** - Activates between tasks. Dual-axis review: Standards (code quality) and Spec (requirement compliance) run in parallel as isolated subagents. Reports issues by severity.
+
+5. **verification-before-completion** - Activates when claiming done. No completion claims without fresh verification evidence.
+
+**The agent checks for relevant skills before any task.** Mandatory workflows, not suggestions.
+
+## What's Inside
+
+### Fused Skills (6)
+
+| Skill | Fusion | What it does |
+|-------|--------|--------------|
+| **diagnose** | mp feedback loop + sp Iron Law | Build signal before debugging |
+| **tdd** | sp Iron Law + mp vertical slice | RED-GREEN-REFACTOR discipline |
+| **review** | mp dual-axis + sp isolated reviewer | Standards vs Spec in parallel |
+| **brainstorming** | sp HARD-GATE + mp explore-first | Design before code |
+| **writing-pipeline** | mp fragments+shape+beats | 3-stage writing workflow |
+| **qa-triage** | mp qa+triage | Interactive QA → auto triage |
+
+### Referenced Skills (15)
+
+**From superpowers**: `verification-before-completion` `writing-plans` `dispatching-parallel-agents` `finishing-a-development-branch` `using-git-worktrees`
+
+**From mattpocock**: `grill-with-docs` `to-issues` `to-prd` `prototype` `caveman` `handoff` `teach` `zoom-out` `improve-codebase-architecture` `git-guardrails`
+
+## Philosophy
+
+- **Iron Law** - Every core skill has non-negotiable rules
+- **Anti-rationalization table** - Directly counters agent skip-step excuses
+- **Feedback loop first** - Debugging and development start from building signals
+- **Vertical slice** - One test, one implementation, no batching
+- **Dual-axis separation** - Standards and requirements reviewed separately
+- **Codebase exploration first** - If the code has the answer, don't ask the user
+
+## Contributing
+
+1. Fork the repository
+2. Create a branch for your work
+3. Follow the skill file conventions (kebab-case, clear description)
+4. Submit a PR
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+
+## Community
+
+- **Issues**: https://github.com/LAN813-git/superpowersplus/issues
+- **Discussions**: https://github.com/LAN813-git/superpowersplus/discussions
 
 ## License
 
-[MIT](LICENSE)
+MIT License - see [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- [obra/superpowers](https://github.com/obra/superpowers) - The original superpowers framework
+- [mattpocock/skills](https://github.com/mattpocock/skills) - Engineering skills library
