@@ -1,6 +1,6 @@
 # Super Powers Plus
 
-Super Powers Plus is a complete software development methodology for your coding agents, built on top of [obra/superpowers](https://github.com/obra/superpowers) and [mattpocock/skills](https://github.com/mattpocock/skills). It combines the best of both worlds into 21 composable skills and a 5-stage workflow that just works.
+Super Powers Plus is a complete software development methodology for your coding agents, built on top of [obra/superpowers](https://github.com/obra/superpowers), [mattpocock/skills](https://github.com/mattpocock/skills), and community plugins. It unifies the 7 core plugins into 23 composable skills and a 5-stage workflow that just works.
 
 ## Quickstart
 
@@ -17,6 +17,20 @@ After you've signed off on the design, your agent puts together an implementatio
 Next up, once you say "go", it launches a *subagent-driven-development* process, having agents work through each engineering task, inspecting and reviewing their work, and continuing forward.
 
 There's a bunch more to it, but that's the core of the system. And because the skills trigger automatically, you don't need to do anything special. Your coding agent just has Super Powers Plus.
+
+## The 7 Core Plugins
+
+Super Powers Plus unifies the 7 essential plugins for AI coding agents:
+
+| # | Plugin | Type | What it does |
+|---|--------|------|--------------|
+| 1 | **Super Powers + Mattpocock** | Fused | Multi-agent engineering workflow with Iron Law discipline |
+| 2 | **Planning with Files** | Fused | Physical plan files as disk working memory |
+| 3 | **PDF** | Built-in | Visual multimodal parsing for technical documents |
+| 4 | **Frontend Design** | Built-in | Tailwind responsive + dark mode + micro-interactions |
+| 5 | **Code Review** | Fused | Dual-axis review (Standards vs Spec) in parallel |
+| 6 | **Skill Creator** | Built-in | Meta-programming: describe workflow in natural language → AI builds skill |
+| 7 | **Humanizer zh** | Fused | Strip 24 AI writing patterns from Chinese text |
 
 ## Installation
 
@@ -80,7 +94,7 @@ cat skills/fused/*.md >> .github/copilot-instructions.md
 
 ## What's Inside
 
-### Fused Skills (6)
+### Fused Skills (8)
 
 | Skill | Fusion | What it does |
 |-------|--------|--------------|
@@ -90,6 +104,8 @@ cat skills/fused/*.md >> .github/copilot-instructions.md
 | **brainstorming** | sp HARD-GATE + mp explore-first | Design before code |
 | **writing-pipeline** | mp fragments+shape+beats | 3-stage writing workflow |
 | **qa-triage** | mp qa+triage | Interactive QA → auto triage |
+| **planning-with-files** | Manus-style file planning | Physical plan files as disk working memory, survives /clear |
+| **humanizer-zh** | op7418/Humanizer-zh | Remove 24 AI writing patterns, quality scoring (50 pts) |
 
 ### Referenced Skills (15)
 
@@ -105,6 +121,8 @@ cat skills/fused/*.md >> .github/copilot-instructions.md
 - **Vertical slice** - One test, one implementation, no batching
 - **Dual-axis separation** - Standards and requirements reviewed separately
 - **Codebase exploration first** - If the code has the answer, don't ask the user
+- **Disk working memory** - Context window is volatile; anything important goes to files
+- **Human-first writing** - Strip AI patterns, write like a person
 
 ## Contributing
 
@@ -128,3 +146,5 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 - [obra/superpowers](https://github.com/obra/superpowers) - The original superpowers framework
 - [mattpocock/skills](https://github.com/mattpocock/skills) - Engineering skills library
+- [OthmanAdi/planning-with-files](https://github.com/OthmanAdi/planning-with-files) - Manus-style file planning system
+- [op7418/Humanizer-zh](https://github.com/op7418/Humanizer-zh) - Chinese AI writing pattern remover

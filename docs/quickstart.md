@@ -14,7 +14,7 @@ irm https://raw.githubusercontent.com/LAN813-git/superpowersplus/main/install.ps
 
 ```bash
 ls ~/.claude/skills/fused/
-# 应看到 21 个 .md 文件
+# 应看到 23 个 .md 文件
 ```
 
 ## 第一次使用

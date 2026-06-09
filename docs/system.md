@@ -1,6 +1,6 @@
 # Super Powers Plus 完整体系文档
 
-> 融合 obra/superpowers + mattpocock/skills，21 个技能，5 阶段工作流。
+> 融合 obra/superpowers + mattpocock/skills + 社区精选插件，23 个技能，5 阶段工作流，七大核心插件全覆盖。
 
 ## 核心理念
 
@@ -10,6 +10,8 @@
 - **垂直切片**：一个测试一个实现
 - **双轴分离**：审查时标准和需求分开看
 - **代码库探索优先**：能查到的不问用户
+- **磁盘工作记忆**：上下文窗口易失，重要内容写文件
+- **人类优先写作**：去除 AI 痕迹，写得像人
 
 ## 五阶段工作流
 
@@ -54,7 +56,7 @@
 
 ## 技能列表
 
-### 融合技能（6 个）
+### 融合技能（8 个）
 
 | 技能 | 融合来源 |
 |------|---------|
@@ -64,6 +66,8 @@
 | `brainstorming` | sp HARD-GATE + mp 探索优先 |
 | `writing-pipeline` | mp fragments+shape+beats |
 | `qa-triage` | mp qa+triage |
+| `planning-with-files-zh` | Manus 风格文件规划（社区） |
+| `humanizer-zh` | op7418/Humanizer-zh（社区） |
 
 ### 引用技能（15 个）
 

@@ -1,8 +1,10 @@
 # Fused Skills Index
 
-融合自 mattpocock/skills + superpowers，取各家之长。共 21 个技能（6 个融合新建 + 15 个纯引用）。
+融合自 mattpocock/skills + superpowers + 社区精选插件，取各家之长。共 23 个技能（8 个融合新建 + 15 个纯引用）。
 
-## 融合技能（6个，新建文件）
+> 本索引覆盖七大核心插件体系：Super Powers + Mattpocock 融合、Planning with Files、PDF、Frontend Design、Code Review、Skill Creator、Humanizer zh。
+
+## 融合技能（8个，新建文件）
 
 | 技能 | 来源融合 | 核心增强 |
 |------|---------|---------|
@@ -12,6 +14,8 @@
 | `brainstorming.md` | sp HARD-GATE + mp 代码库优先 | 先设计后编码 + 探索优先于提问 + 轻量化流程 |
 | `writing-pipeline.md` | mp fragments+shape+beats | 三阶段写作流水线：素材挖掘→结构塑形→节拍叙事 |
 | `qa-triage.md` | mp qa+triage | 交互式 QA→自动分诊→状态机流转 |
+| `planning-with-files-zh.md` | Manus 风格文件规划 | 物理规划文件（task_plan/findings/progress）作为磁盘工作记忆，支持 /clear 后自动恢复 |
+| `humanizer-zh.md` | op7418/Humanizer-zh | 去除 AI 写作痕迹，24 种模式识别 + 质量评分（50 分制） |
 
 ## 纯引用技能（15个，symlink/复制）
 
@@ -82,3 +86,23 @@
 | Phase 3 | 监控恢复 | 需关注 issue 列表 |
 
 **状态机**：unlabeled → needs-triage → needs-info / ready-for-agent / ready-for-human / wontfix
+
+### Planning with Files（文件规划系统）
+
+| 维度 | 说明 |
+|------|------|
+| **核心理念** | 上下文窗口 = 内存（易失），文件系统 = 磁盘（持久） |
+| **三个文件** | `task_plan.md`（阶段/进度）、`findings.md`（研究发现）、`progress.md`（会话日志） |
+| **触发条件** | 多步骤任务（≥3步）、研究任务、跨会话项目 |
+| **安全边界** | 外部内容仅写入 findings.md，task_plan.md 通过 PreToolUse 钩子自动注入上下文 |
+| **模板** | `planning-with-files-zh-templates/` 目录下 |
+
+### Humanizer zh（去 AI 痕迹）
+
+| 维度 | 说明 |
+|------|------|
+| **核心功能** | 识别并去除 24 种 AI 写作模式 |
+| **五大类** | 内容模式、语言语法、风格模式、交流模式、填充词 |
+| **质量评分** | 直接性/节奏/信任度/真实性/精炼度，各 10 分，总分 50 |
+| **适用场景** | 中文文档、PR 描述、提交信息、技术博客 |
+| **来源** | 翻译自 blader/humanizer，参考 hardikpandya/stop-slop，基于维基百科 AI 写作特征 |
