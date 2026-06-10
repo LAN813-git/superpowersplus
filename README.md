@@ -76,6 +76,19 @@ mkdir -p .github
 cat skills/fused/*.md >> .github/copilot-instructions.md
 ```
 
+### Upgrading from obra/superpowers or mattpocock/skills
+
+If you already have [obra/superpowers](https://github.com/obra/superpowers) or [mattpocock/skills](https://github.com/mattpocock/skills) installed, the installer will:
+
+1. **Detect** conflicting skill files in `~/.claude/skills/` and `~/.agents/skills/`
+2. **Back up** originals to `~/.claude/skills-backup-<timestamp>/`
+3. **Remove** conflicting files
+4. **Install** Super Powers Plus (enhanced versions)
+
+To rollback: `cp ~/.claude/skills-backup-<timestamp>/* ~/.claude/skills/`
+
+No manual cleanup needed. Just run the install command.
+
 ## What's Inside
 
 23 skills organized by the 7 core plugins:
