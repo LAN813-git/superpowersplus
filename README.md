@@ -1,36 +1,38 @@
 # Super Powers Plus
 
-Super Powers Plus is a complete software development methodology for your coding agents, built on top of [obra/superpowers](https://github.com/obra/superpowers), [mattpocock/skills](https://github.com/mattpocock/skills), and community plugins. It unifies the 7 core plugins into 23 composable skills and a 5-stage workflow that just works.
+Super Powers Plus unifies the 7 essential plugins for AI coding agents into a single install. No more manually collecting skills from different repos. One command, everything works.
 
 ## Quickstart
 
 Give your agent Super Powers Plus: [Claude Code](#claude-code), [Codex CLI](#codex-cli), [Cursor](#cursor), [Gemini CLI](#gemini-cli), [GitHub Copilot CLI](#github-copilot-cli).
 
-## How it works
-
-It starts from the moment you fire up your coding agent. As soon as it sees that you're building something, it *doesn't* just jump into trying to write code. Instead, it steps back and asks you what you're really trying to do.
-
-Once it's teased a spec out of the conversation, it shows it to you in chunks short enough to actually read and digest.
-
-After you've signed off on the design, your agent puts together an implementation plan that's clear enough for an enthusiastic junior engineer with poor taste, no judgement, no project context, and an aversion to testing to follow. It emphasizes true red/green TDD, YAGNI (You Aren't Gonna Need It), and DRY.
-
-Next up, once you say "go", it launches a *subagent-driven-development* process, having agents work through each engineering task, inspecting and reviewing their work, and continuing forward.
-
-There's a bunch more to it, but that's the core of the system. And because the skills trigger automatically, you don't need to do anything special. Your coding agent just has Super Powers Plus.
-
 ## The 7 Core Plugins
 
-Super Powers Plus unifies the 7 essential plugins for AI coding agents:
+| # | Plugin | What it solves |
+|---|--------|----------------|
+| 1 | **Super Powers + Mattpocock** | Agent jumps into code without understanding the goal. No tests, no review, no verification. |
+| 2 | **Planning with Files** | Context window fills up, agent forgets what it was doing. Session restart = start over. |
+| 3 | **PDF** | Can't read technical docs, API whitepapers, or papers with charts. |
+| 4 | **Frontend Design** | Programmer aesthetics. Ugly UI, no dark mode, no responsive layout. |
+| 5 | **Code Review** | Code ships with dead loops, OWASP vulnerabilities, spec violations nobody caught. |
+| 6 | **Skill Creator** | Repeating the same workflow manually. Can't extend the agent's capabilities. |
+| 7 | **Humanizer zh** | Chinese output sounds like a translation engine. Stiff, formulaic, obviously AI. |
 
-| # | Plugin | Type | What it does |
-|---|--------|------|--------------|
-| 1 | **Super Powers + Mattpocock** | Fused | Multi-agent engineering workflow with Iron Law discipline |
-| 2 | **Planning with Files** | Fused | Physical plan files as disk working memory |
-| 3 | **PDF** | Built-in | Visual multimodal parsing for technical documents |
-| 4 | **Frontend Design** | Built-in | Tailwind responsive + dark mode + micro-interactions |
-| 5 | **Code Review** | Fused | Dual-axis review (Standards vs Spec) in parallel |
-| 6 | **Skill Creator** | Built-in | Meta-programming: describe workflow in natural language → AI builds skill |
-| 7 | **Humanizer zh** | Fused | Strip 24 AI writing patterns from Chinese text |
+## How it works
+
+The moment you start your agent, Super Powers Plus takes over:
+
+**1. Plan first.** Before touching code, the agent reads or creates a `task_plan.md` in your project. This file is the agent's disk working memory -- it survives context compaction, session restarts, and `/clear`. Every phase, every finding, every error gets written to disk.
+
+**2. Design before code.** The agent explores your codebase, asks you what you actually want, and presents a design in chunks you can actually read. HARD-GATE: no code until you approve.
+
+**3. Build with discipline.** RED-GREEN-REFACTOR. Write a failing test first, then the minimum code to pass it. Iron Law: no production code without a failing test.
+
+**4. Review in parallel.** Two independent subagents review your code at the same time -- one checks code quality (Standards), the other checks requirement compliance (Spec). They don't see each other's work.
+
+**5. Verify before shipping.** No "done" claims without fresh evidence. Tests must pass, specs must be met, and if you're writing Chinese documentation, the Humanizer strips 24 AI writing patterns before it ships.
+
+And because the skills trigger automatically, you don't need to do anything special. Your coding agent just has Super Powers Plus.
 
 ## Installation
 
@@ -51,14 +53,12 @@ irm https://raw.githubusercontent.com/LAN813-git/superpowersplus/main/install.ps
 ### Codex CLI
 
 ```bash
-# Copy skills to Codex skills directory
 cp -r skills/fused/* ~/.codex/skills/
 ```
 
 ### Cursor
 
 ```bash
-# Copy skills to Cursor rules directory
 mkdir -p .cursor/rules
 cp skills/fused/*.md .cursor/rules/
 ```
@@ -66,63 +66,105 @@ cp skills/fused/*.md .cursor/rules/
 ### Gemini CLI
 
 ```bash
-# Append skills to GEMINI.md
 cat skills/fused/*.md >> GEMINI.md
 ```
 
 ### GitHub Copilot CLI
 
 ```bash
-# Copy skills to Copilot instructions
 mkdir -p .github
 cat skills/fused/*.md >> .github/copilot-instructions.md
 ```
 
-## The Basic Workflow
-
-1. **brainstorming** - Activates before writing code. Refines rough ideas through questions, explores alternatives, presents design in sections for validation. Saves design document. HARD-GATE: no code until user approves.
-
-2. **writing-plans** - Activates with approved design. Breaks work into bite-sized tasks (2-5 minutes each). Every task has exact file paths, complete code, verification steps.
-
-3. **test-driven-development** - Activates during implementation. Enforces RED-GREEN-REFACTOR: write failing test, watch it fail, write minimal code, watch it pass, commit. Iron Law: no production code without a failing test first.
-
-4. **review** - Activates between tasks. Dual-axis review: Standards (code quality) and Spec (requirement compliance) run in parallel as isolated subagents. Reports issues by severity.
-
-5. **verification-before-completion** - Activates when claiming done. No completion claims without fresh verification evidence.
-
-**The agent checks for relevant skills before any task.** Mandatory workflows, not suggestions.
-
 ## What's Inside
 
-### Fused Skills (8)
+23 skills organized by the 7 core plugins:
 
-| Skill | Fusion | What it does |
-|-------|--------|--------------|
-| **diagnose** | mp feedback loop + sp Iron Law | Build signal before debugging |
-| **tdd** | sp Iron Law + mp vertical slice | RED-GREEN-REFACTOR discipline |
-| **review** | mp dual-axis + sp isolated reviewer | Standards vs Spec in parallel |
-| **brainstorming** | sp HARD-GATE + mp explore-first | Design before code |
-| **writing-pipeline** | mp fragments+shape+beats | 3-stage writing workflow |
-| **qa-triage** | mp qa+triage | Interactive QA → auto triage |
-| **planning-with-files** | Manus-style file planning | Physical plan files as disk working memory, survives /clear |
-| **humanizer-zh** | op7418/Humanizer-zh | Remove 24 AI writing patterns, quality scoring (50 pts) |
+### Plugin 1: Super Powers + Mattpocock (engineering workflow)
 
-### Referenced Skills (15)
+| Skill | What it does |
+|-------|--------------|
+| **brainstorming** | HARD-GATE: design before code, explore codebase first |
+| **writing-plans** | Zero-placeholder execution plans, 2-5 min per task |
+| **tdd** | RED-GREEN-REFACTOR, Iron Law enforced |
+| **diagnose** | Build feedback loop before debugging |
+| **review** | Dual-axis: Standards vs Spec in parallel |
+| **verification-before-completion** | No done without fresh evidence |
+| **dispatching-parallel-agents** | Parallel subagent orchestration |
+| **finishing-a-development-branch** | Branch lifecycle: merge/PR/keep/discard |
+| **using-git-worktrees** | Isolated workspaces for feature work |
+| **grill-with-docs** | Domain-driven requirement interviews |
+| **to-issues** | Plan to GitHub issues, vertical sliced |
+| **to-prd** | Conversation to PRD |
+| **prototype** | Throwaway prototypes for design validation |
+| **caveman** | Ultra-compressed comms, ~75% token savings |
+| **handoff** | Conversation compaction for agent handoff |
+| **teach** | Multi-session teaching system |
+| **zoom-out** | High-level abstraction perspective |
+| **improve-codebase-architecture** | Architecture inspection with delete tests |
+| **git-guardrails** | Git dangerous command hooks |
 
-**From superpowers**: `verification-before-completion` `writing-plans` `dispatching-parallel-agents` `finishing-a-development-branch` `using-git-worktrees`
+### Plugin 2: Planning with Files
 
-**From mattpocock**: `grill-with-docs` `to-issues` `to-prd` `prototype` `caveman` `handoff` `teach` `zoom-out` `improve-codebase-architecture` `git-guardrails`
+| Skill | What it does |
+|-------|--------------|
+| **planning-with-files-zh** | Physical `task_plan.md` + `findings.md` + `progress.md` as disk working memory. Survives `/clear`, session restarts, context compaction. |
+
+### Plugin 7: Humanizer zh
+
+| Skill | What it does |
+|-------|--------------|
+| **humanizer-zh** | Detects and removes 24 AI writing patterns in Chinese. Quality scoring: directness, rhythm, trust, authenticity, conciseness (50 pts total). |
+
+### Plugins 3-6: Built-in
+
+PDF, Frontend Design, Code Review (via `review` above), and Skill Creator are built into Claude Code and activated by default. No extra installation needed.
+
+## The Basic Workflow
+
+```
+                    ┌─────────────┐
+                    │   Planning   │ ← task_plan.md on disk
+                    │  with Files  │
+                    └──────┬──────┘
+                           │
+                    ┌──────▼──────┐
+                    │ Brainstorming│ ← HARD-GATE
+                    └──────┬──────┘
+                           │
+                    ┌──────▼──────┐
+                    │Writing Plans │ ← exact file paths + code
+                    └──────┬──────┘
+                           │
+                    ┌──────▼──────┐
+                    │     TDD      │ ← RED-GREEN-REFACTOR
+                    └──────┬──────┘
+                           │
+                    ┌──────▼──────┐
+                    │    Review    │ ← Standards ‖ Spec
+                    └──────┬──────┘
+                           │
+                    ┌──────▼──────┐
+                    │ Verification │ ← no done without evidence
+                    └──────┬──────┘
+                           │
+                    ┌──────▼──────┐
+                    │  Humanizer   │ ← strip AI patterns (zh)
+                    └──────┬──────┘
+                           │
+                         Done.
+```
 
 ## Philosophy
 
-- **Iron Law** - Every core skill has non-negotiable rules
-- **Anti-rationalization table** - Directly counters agent skip-step excuses
-- **Feedback loop first** - Debugging and development start from building signals
-- **Vertical slice** - One test, one implementation, no batching
-- **Dual-axis separation** - Standards and requirements reviewed separately
-- **Codebase exploration first** - If the code has the answer, don't ask the user
-- **Disk working memory** - Context window is volatile; anything important goes to files
-- **Human-first writing** - Strip AI patterns, write like a person
+- **Iron Law** -- Every core skill has non-negotiable rules. The agent can't rationalize its way out.
+- **Anti-rationalization table** -- Every skill lists the top 3 excuses the agent will try, with exact counter-arguments.
+- **Feedback loop first** -- Debugging and development start from building signals, not guessing.
+- **Vertical slice** -- One test, one implementation. No batching.
+- **Dual-axis separation** -- Standards and requirements reviewed in parallel, by isolated subagents.
+- **Codebase exploration first** -- If the code has the answer, don't ask the user.
+- **Disk working memory** -- Context window is volatile. Anything important goes to files that survive session restarts.
+- **Human-first writing** -- AI output has patterns. We detect and strip them.
 
 ## Contributing
 
@@ -144,7 +186,7 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
-- [obra/superpowers](https://github.com/obra/superpowers) - The original superpowers framework
-- [mattpocock/skills](https://github.com/mattpocock/skills) - Engineering skills library
-- [OthmanAdi/planning-with-files](https://github.com/OthmanAdi/planning-with-files) - Manus-style file planning system
-- [op7418/Humanizer-zh](https://github.com/op7418/Humanizer-zh) - Chinese AI writing pattern remover
+- [obra/superpowers](https://github.com/obra/superpowers) -- The original superpowers framework
+- [mattpocock/skills](https://github.com/mattpocock/skills) -- Engineering skills library
+- [OthmanAdi/planning-with-files](https://github.com/OthmanAdi/planning-with-files) -- Manus-style file planning
+- [op7418/Humanizer-zh](https://github.com/op7418/Humanizer-zh) -- Chinese AI writing pattern remover
