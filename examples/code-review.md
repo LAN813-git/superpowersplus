@@ -1,15 +1,20 @@
 # 示例：代码审查
 
 ```
-> review main
+> 审查 main 分支的变更
 ```
 
-- Standards 轴：编码规范、最佳实践
-- Spec 轴：需求实现、边界情况
-- 并行执行，严重性分级
+代理自动执行：
+
+1. **review** — 两个 subagent 并行：
+   - Standards 轴：编码规范、最佳实践
+   - Spec 轴：需求实现、边界情况
+2. 按严重性分级报告问题
+
+## 中文文档审查
 
 ```
-> qa-triage
+> 帮我把这份技术文档去一下 AI 味
 ```
 
-对问题分诊 → 创建 issue → 生成 agent brief
+3. **humanizer-zh** — 扫描 24 种 AI 写作模式 → 重写 → 50 分制评分
